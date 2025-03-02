@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,32 +24,33 @@ public class GameActivity extends AppCompatActivity {
     private int highScore = 0;
     private Handler handler = new Handler();
     private int timeLeft = 10;
+    private Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Button clickMeButton = findViewById(R.id.clickMeButton);
+        ImageView dogeImageView = findViewById(R.id.dogeImageView);
         TextView timerTextView = findViewById(R.id.timerTextView);
         Button backButton = findViewById(R.id.backButton);
         Button retryButton = findViewById(R.id.retryButton);
 
         // Load HighScore from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("GamePrefs", Context.MODE_PRIVATE);
-        highScore = sharedPreferences.getInt("HighScore", 0); // Default is 0
-
-        Random random = new Random();
+        highScore = sharedPreferences.getInt("HighScore", 0);
 
         // Initialize Retry button as hidden
         retryButton.setVisibility(View.GONE);
 
-        clickMeButton.setOnClickListener(v -> {
+        // Doge Click Me Button functionality
+        dogeImageView.setOnClickListener(v -> {
             score++;
-            int x = random.nextInt(800); // Random X position
-            int y = random.nextInt(1600); // Random Y position
-            clickMeButton.setX(x);
-            clickMeButton.setY(y);
+            // Move Doge to a random position
+            int x = random.nextInt(800);
+            int y = random.nextInt(1600);
+            dogeImageView.setX(x);
+            dogeImageView.setY(y);
         });
 
         // Timer logic
@@ -60,7 +62,7 @@ public class GameActivity extends AppCompatActivity {
                     timerTextView.setText("Time Left: " + timeLeft);
                     handler.postDelayed(this, 1000);
                 } else {
-                    clickMeButton.setEnabled(false);
+                    dogeImageView.setEnabled(false);
                     retryButton.setVisibility(View.VISIBLE);
                     endGame();
                 }
@@ -79,7 +81,7 @@ public class GameActivity extends AppCompatActivity {
             // Reset game state
             score = 0;
             timeLeft = 10;
-            clickMeButton.setEnabled(true);
+            dogeImageView.setEnabled(true);
             retryButton.setVisibility(View.GONE);
             timerTextView.setText("Time Left: " + timeLeft);
             handler.post(timerRunnable);

@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/doge_background">
 
     <!-- Таймер обратного отсчета -->
     <TextView
@@ -11,15 +12,15 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="Time Left: 10"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="#FF0000" />
 
-    <!-- Кнопка Click Me -->
-    <Button
-        android:id="@+id/clickMeButton"
+    <ImageView
+        android:id="@+id/dogeImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerInParent="true"
-        android:text="Click Me" />
+        android:src="@drawable/doge_logo"
+        android:layout_centerInParent="true" />
 
     <!-- Кнопка для возврата на главный экран -->
     <Button
@@ -29,7 +30,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
-        android:text="Back" />
+        android:text="Back"
+        android:textColor="#ffcc00"
+        android:background="@drawable/doge_button_bg" />
 
     <!-- Retry Button-->
     <Button
@@ -38,6 +41,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/backButton"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
         android:text="Retry"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:textColor="#ffcc00"
+        android:background="@drawable/doge_button_bg" />
 </RelativeLayout>

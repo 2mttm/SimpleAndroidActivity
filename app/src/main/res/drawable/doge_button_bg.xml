@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="50dp" /> <!-- Закругленные края -->
+            <solid android:color="#FFA500" /> <!-- Оранжевый при нажатии -->
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="50dp" />
+            <solid android:color="#FFD700" /> <!-- Желтый цвет -->
+            <stroke android:width="4dp" android:color="#FF8C00" /> <!-- Оранжевая обводка -->
+        </shape>
+    </item>
+</selector>
