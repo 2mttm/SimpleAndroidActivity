@@ -6,6 +6,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,16 +27,23 @@ public class GameActivity extends AppCompatActivity {
     private Handler handler = new Handler();
     private int timeLeft = 10;
     private Random random = new Random();
+    private boolean isGameRunning = false;
+    private Runnable timerRunnable;
+
+    private ImageView dogeImageView;
+    private TextView timerTextView;
+    private Button backButton;
+    private Button retryButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        ImageView dogeImageView = findViewById(R.id.dogeImageView);
-        TextView timerTextView = findViewById(R.id.timerTextView);
-        Button backButton = findViewById(R.id.backButton);
-        Button retryButton = findViewById(R.id.retryButton);
+        dogeImageView = findViewById(R.id.dogeImageView);
+        timerTextView = findViewById(R.id.timerTextView);
+        backButton = findViewById(R.id.backButton);
+        retryButton = findViewById(R.id.retryButton);
 
         // Load HighScore from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("GamePrefs", Context.MODE_PRIVATE);
@@ -45,16 +54,18 @@ public class GameActivity extends AppCompatActivity {
 
         // Doge Click Me Button functionality
         dogeImageView.setOnClickListener(v -> {
-            score++;
-            // Move Doge to a random position
-            int x = random.nextInt(800);
-            int y = random.nextInt(1600);
-            dogeImageView.setX(x);
-            dogeImageView.setY(y);
+            if (isGameRunning) {
+                score++;
+                // Move Doge to a random position
+                int x = random.nextInt(800);
+                int y = random.nextInt(1600);
+                dogeImageView.setX(x);
+                dogeImageView.setY(y);
+            }
         });
 
         // Timer logic
-        Runnable timerRunnable = new Runnable() {
+        timerRunnable = new Runnable() {
             @Override
             public void run() {
                 if (timeLeft > 0) {
@@ -62,13 +73,10 @@ public class GameActivity extends AppCompatActivity {
                     timerTextView.setText("Time Left: " + timeLeft);
                     handler.postDelayed(this, 1000);
                 } else {
-                    dogeImageView.setEnabled(false);
-                    retryButton.setVisibility(View.VISIBLE);
                     endGame();
                 }
             }
         };
-        handler.post(timerRunnable);
 
         // Back button functionality
         backButton.setOnClickListener(v -> {
@@ -77,18 +85,50 @@ public class GameActivity extends AppCompatActivity {
         });
 
         // Retry button functionality
-        retryButton.setOnClickListener(v -> {
-            // Reset game state
-            score = 0;
-            timeLeft = 10;
-            dogeImageView.setEnabled(true);
-            retryButton.setVisibility(View.GONE);
-            timerTextView.setText("Time Left: " + timeLeft);
-            handler.post(timerRunnable);
-        });
+        retryButton.setOnClickListener(v -> restartGame());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startGame();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacksAndMessages(null); // Остановка таймера при выходе
+        isGameRunning = false;
+    }
+
+    private void startGame() {
+        score = 0;
+        timeLeft = 10;
+        dogeImageView.setEnabled(true);
+        retryButton.setVisibility(View.GONE);
+        timerTextView.setText("Time Left: " + timeLeft);
+        isGameRunning = true;
+
+        // Сбрасываем цветовое изменение (убираем серый фильтр)
+        dogeImageView.clearColorFilter();
+
+        handler.post(timerRunnable); // Запуск таймера при возврате на активити
+    }
+
+    private void restartGame() {
+        startGame();
     }
 
     private void endGame() {
+        isGameRunning = false;
+        dogeImageView.setEnabled(false);
+        retryButton.setVisibility(View.VISIBLE);
+
+        // Применяем серый фильтр к картинке доги
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0); // Убираем цвет
+        dogeImageView.setColorFilter(new ColorMatrixColorFilter(matrix));
+
         // Check and update HighScore
         if (score > highScore) {
             highScore = score;
