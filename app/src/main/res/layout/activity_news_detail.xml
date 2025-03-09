@@ -1,94 +1,102 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center_horizontal"
-    android:background="#121212">
+    android:fitsSystemWindows="true"
+    android:background="#121212"
+    android:orientation="vertical">
 
-    <!-- Картинка коина -->
-    <ImageView
-        android:id="@+id/newsDetailImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="centerCrop"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Название и символ -->
-    <TextView
-        android:id="@+id/newsDetailTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#FFD700"
-        android:layout_marginBottom="8dp" />
-
-    <TextView
-        android:id="@+id/newsDetailSymbol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="8dp" />
-
-    <!-- Цена -->
-    <TextView
-        android:id="@+id/newsDetailPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#00FF00"
-        android:layout_marginBottom="8dp" />
-
-    <!-- Изменение цены за 24ч -->
-    <TextView
-        android:id="@+id/newsDetailPriceChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#FF4444"
-        android:layout_marginBottom="8dp" />
-
-    <!-- Рыночная капитализация -->
-    <TextView
-        android:id="@+id/newsDetailMarketCap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="8dp" />
-
-    <!-- Общий объем торгов -->
-    <TextView
-        android:id="@+id/newsDetailTotalVolume"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="16dp" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center" />
-
-    <!-- График -->
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chartSparkline"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@android:color/black" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
 
-    <!-- Кнопка "Назад" -->
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Back"
-        android:textColor="#FFFFFF"
-        android:background="@drawable/doge_button_bg" />
+        <!-- Картинка коина -->
+        <ImageView
+            android:id="@+id/newsDetailImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="16dp"
+            android:scaleType="centerCrop" />
+
+        <!-- Название и символ -->
+        <TextView
+            android:id="@+id/newsDetailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/yellow"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/newsDetailSymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <!-- Цена -->
+        <TextView
+            android:id="@+id/newsDetailPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="#00FF00"
+            android:textSize="16sp" />
+
+        <!-- Изменение цены за 24ч -->
+        <TextView
+            android:id="@+id/newsDetailPriceChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="#FF4444"
+            android:textSize="16sp" />
+
+        <!-- Рыночная капитализация -->
+        <TextView
+            android:id="@+id/newsDetailMarketCap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <!-- Общий объем торгов -->
+        <TextView
+            android:id="@+id/newsDetailTotalVolume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <!-- График -->
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chartSparkline"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@android:color/black" />
+
+        <!-- Кнопка "Назад" -->
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Back"
+            android:textColor="@color/yellow"
+            android:backgroundTint="@color/button_bg" />
+    </LinearLayout>
+
 </LinearLayout>

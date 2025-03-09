@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:fitsSystemWindows="true"
     android:background="@drawable/doge_background">
 
     <!-- Таймер обратного отсчета -->
@@ -31,8 +32,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:text="Back"
-        android:textColor="#ffcc00"
-        android:background="@drawable/doge_button_bg" />
+        android:textColor="@color/yellow"
+        android:backgroundTint="@color/button_bg" />
 
     <!-- Retry Button-->
     <Button
@@ -44,6 +45,6 @@
         android:layout_marginBottom="4dp"
         android:text="Retry"
         android:visibility="gone"
-        android:textColor="#ffcc00"
-        android:background="@drawable/doge_button_bg" />
+        android:textColor="@color/yellow"
+        android:backgroundTint="@color/button_bg" />
 </RelativeLayout>

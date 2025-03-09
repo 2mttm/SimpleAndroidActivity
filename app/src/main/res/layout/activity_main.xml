@@ -1,39 +1,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#121212"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <!-- Верхнее меню (Toolbar) -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:titleTextColor="#FFD700"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#1E1E1E"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <!-- Логотип DOGE слева -->
-        <ImageView
-            android:id="@+id/dogeLogo"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="start"
-            android:layout_margin="8dp"
-            android:src="@drawable/doge_logo" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <!-- Кнопка обновления справа -->
-        <ImageButton
-            android:id="@+id/refreshButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="end"
-            android:layout_margin="8dp"
-            android:background="?attr/selectableItemBackground"
-            android:contentDescription="Refresh"
-            android:src="@drawable/ic_refresh" />
+            <!-- Логотип слева -->
+            <ImageView
+                android:id="@+id/dogeLogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/doge_logo_svg"
+                app:tint="@color/yellow" />
+
+            <!-- Название приложения -->
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toEndOf="@id/dogeLogo"
+                android:text="@string/app_name"
+                android:textColor="@color/yellow"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- Кнопка обновления справа -->
+            <ImageButton
+                android:id="@+id/refreshButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="Refresh"
+                android:src="@drawable/ic_refresh" />
+        </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <ProgressBar
@@ -43,41 +63,48 @@
         android:layout_gravity="center"
         android:visibility="visible" />
 
-    <!-- TextBox для ввода текста -->
-    <EditText
-        android:id="@+id/editText"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Enter text for Doge search"
-        android:inputType="text"
-        android:textColorHint="#ffcc00"
-        android:textColor="#ffcc00" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="16dp">
 
-    <!-- Кнопка для поиска -->
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/doge_button_bg"
-        android:text="Search Dogecoin!"
-        android:textColor="#ffcc00" />
+        <!-- TextBox для ввода текста -->
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Enter text for Doge search"
+            android:inputType="text"
+            android:textColor="@color/yellow"
+            android:textColorHint="@color/yellow" />
 
-    <!-- Кнопка для перехода к игре -->
-    <Button
-        android:id="@+id/gameButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/doge_button_bg"
-        android:text="Play Doge Game"
-        android:textColor="#ffcc00" />
+        <!-- Кнопка для поиска -->
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Search Dogecoin!"
+            android:textColor="@color/yellow"
+            android:backgroundTint="@color/button_bg" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewNews"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <!-- Кнопка для перехода к игре -->
+        <Button
+            android:id="@+id/gameButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Play Doge Game"
+            android:textColor="@color/yellow"
+            android:backgroundTint="@color/button_bg" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
 
 </LinearLayout>
