@@ -159,7 +159,7 @@ public class CryptoCoinDetailActivity extends AppCompatActivity {
 
         // Описание
         Description description = new Description();
-        description.setText("Price Trend (30 days)");
+        description.setText("Price Trend");
         description.setTextColor(Color.WHITE);
         chartSparkline.setDescription(description);
     }
